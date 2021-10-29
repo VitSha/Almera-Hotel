@@ -1,101 +1,189 @@
-/* ------------- START open and close nav-menu-------------*/
-   
+'use strict';
+
+/* -------------  open and close nav-menu START-------------*/
+  
+
 (function () {
     const navWrapper = document.querySelector('.nav-wrapper');
-    const navWrapperFull = document.querySelector('.nav-wrapper-full')
-    const mainItem = document.querySelector('.menu__item-full')
+    const mainItem = document.querySelector('.main-item');
+    const menuItemBurger = document.querySelectorAll('.menu__item_burger');
+    const navMenu = document.querySelector('.nav-menu');
+    const menuItem = document.querySelectorAll('.menu__item')
+    const itemTitle = document.querySelector('.item-title');
+    let base = true;
+
+
+    if (document.documentElement.clientWidth > 540) {
+      navWrapper.addEventListener('mouseenter', () => {
+        navWrapper.classList.add('width_nav-open');
+        [...document.getElementsByClassName('item-title')].forEach(i => 
+          i.classList.add("font-size__item-title"));  
+        menuItemBurger[0].classList.add('display-none');
+        menuItemBurger[1].classList.remove('display-none');
+        base = false;
   
-    navWrapper.addEventListener('mouseenter', () => {
-        navWrapper.classList.add('display-none'); 
-        navWrapperFull.classList.remove('display-none');   
-    });
+      });
   
-    navWrapperFull.addEventListener('mouseleave', () => {
-        navWrapper.classList.remove('display-none'); 
-        navWrapperFull.classList.add('display-none'); 
-    });
+      navWrapper.addEventListener('mouseleave', () => {
+        navWrapper.classList.remove('width_nav-open'); 
+        [...document.getElementsByClassName('item-title')].forEach(i => 
+          i.classList.remove("font-size__item-title"));
+        menuItemBurger[0].classList.remove('display-none');
+        menuItemBurger[1].classList.add('display-none');
+      });
   
-    mainItem.addEventListener('click', () => {
-      navWrapper.classList.remove('display-none'); 
-      navWrapperFull.classList.add('display-none'); 
-    });
+      mainItem.addEventListener('click', () => {
+        if (base) {
+          navWrapper.classList.add('width_nav-open');
+          [...document.getElementsByClassName('item-title')].forEach(i => 
+            i.classList.add("font-size__item-title")); 
+          menuItemBurger[0].classList.add('display-none');
+          menuItemBurger[1].classList.remove('display-none');
+          base = false; 
   
+        } else {
+          navWrapper.classList.remove('width_nav-open'); 
+          [...document.getElementsByClassName('item-title')].forEach(i => 
+            i.classList.remove("font-size__item-title")); 
+          menuItemBurger[0].classList.remove('display-none');
+          menuItemBurger[1].classList.add('display-none');
+          base = true;
+  
+        }
+      });
+
+    } else {
+
+      navWrapper.addEventListener('mouseenter', () => {
+        navWrapper.style.height = "100%";
+        navMenu.style.height = "100%";
+        
+        
+        itemTitle.style.fontSize = "1rem";
+        itemTitle.style.display = "block";
+        for (i = 1; i < menuItem.length; i++) {
+          menuItem[i].style.display = "flex";
+        }
+        menuItemBurger[0].classList.add('display-none');
+        menuItemBurger[1].classList.remove('display-none');
+        base = false;
+      });
+  
+      navWrapper.addEventListener('mouseleave', () => {
+        navWrapper.style.height = "58px"; 
+        navMenu.style.height = "58px";
+        for (i = 1; i < menuItem.length; i++) {
+          menuItem[i].style.display = "none";
+        } 
+        itemTitle.style.display = "none";
+        [...document.getElementsByClassName('item-title')].forEach(i => 
+          i.classList.remove("font-size__item-title"));
+        menuItemBurger[0].classList.remove('display-none');
+        menuItemBurger[1].classList.add('display-none');
+      });
+  
+      mainItem.addEventListener('click', () => {
+        if (base) {
+          navWrapper.style.height = "100%";
+          navMenu.style.height = "100%";
+          for (i = 1; i < menuItem.length; i++) {
+            menuItem[i].style.display = "flex";
+          }
+          itemTitle.style.fontSize = "1rem";
+          itemTitle.style.display = "block";
+          [...document.getElementsByClassName('item-title')].forEach(i => 
+            i.classList.add("font-size__item-title")); 
+          menuItemBurger[0].classList.add('display-none');
+          menuItemBurger[1].classList.remove('display-none');
+          base = false; 
+  
+        } else {
+          navWrapper.style.height = "58px"; 
+          navMenu.style.height = "58px"; 
+          for (i = 1; i < menuItem.length; i++) {
+            menuItem[i].style.display = "none";
+          }
+          itemTitle.style.display = "none";
+          [...document.getElementsByClassName('item-title')].forEach(i => 
+            i.classList.remove("font-size__item-title")); 
+          menuItemBurger[0].classList.remove('display-none');
+          menuItemBurger[1].classList.add('display-none');
+          base = true;
+        }
+      });
+    };
+
+    
   }());  
-  
-  /* ------------- END open and close nav-menu-------------*/
+
 
   
-/* ------------- START switcher in services section-------------*/
+  /* -------------  open and close nav-menu END-------------*/
+
+  
+/* -------------  switcher in services section START-------------*/
 
 (function () {
     const switcherLeft = document.querySelector('.switcher-left');
-    const switcherCenter = document.querySelector('.switcher-center')
-    const switcherRight = document.querySelector('.switcher-right')
-  
-    const cafeTitle = document.querySelector('.cafe-title');
-    const restTitle = document.querySelector('.rest-title')
-    const parkingTitle = document.querySelector('.parking-title')
-  
-    const cafeText = document.querySelector('.cafe-text');
-    const restText = document.querySelector('.rest-text')
-    const parkingText = document.querySelector('.parking-text')
-
-    const cafePhoto = document.querySelector('.cafe-photo');
-    const restPhoto = document.querySelector('.rest-photo')
-    const parkingPhoto = document.querySelector('.parking-photo')
+    const switcherCenter = document.querySelector('.switcher-center');
+    const switcherRight = document.querySelector('.switcher-right');
+    const serviceInfoWrapper = document.querySelectorAll('.services__service-info_wrapper');
+    const servicesPhoto = document.querySelectorAll('.services__photo');
+    const switcherSlider = document.querySelector('.switcher-slider__slider');
   
     switcherLeft.addEventListener('click', () => {
+        switcherSlider.classList.add('switcher-slider__slider-left');
+        switcherSlider.classList.remove('switcher-slider__slider-center');
+        switcherSlider.classList.remove('switcher-slider__slider-right');
+
         switcherLeft.classList.add('switcher-click-color'); 
         switcherCenter.classList.remove('switcher-click-color'); 
         switcherRight.classList.remove('switcher-click-color');  
-        cafeTitle.classList.remove('display-none'); 
-        cafeText.classList.remove('display-none'); 
-        restTitle.classList.add('display-none'); 
-        restText.classList.add('display-none'); 
-        parkingTitle.classList.add('display-none'); 
-        parkingText.classList.add('display-none'); 
-        cafePhoto.classList.remove('display-none'); 
-        restPhoto.classList.add('display-none'); 
-        parkingPhoto.classList.add('display-none');
-
-  
+        serviceInfoWrapper[0].classList.remove('display-none'); 
+        serviceInfoWrapper[1].classList.add('display-none'); 
+        serviceInfoWrapper[2].classList.add('display-none'); 
+        servicesPhoto[0].classList.remove('display-none'); 
+        servicesPhoto[1].classList.add('display-none'); 
+        servicesPhoto[2].classList.add('display-none'); 
     });
   
     switcherCenter.addEventListener('click', () => {
+      switcherSlider.classList.remove('switcher-slider__slider-left');
+      switcherSlider.classList.add('switcher-slider__slider-center');
+      switcherSlider.classList.remove('switcher-slider__slider-right');
+
       switcherLeft.classList.remove('switcher-click-color'); 
       switcherCenter.classList.add('switcher-click-color'); 
       switcherRight.classList.remove('switcher-click-color'); 
-      cafeTitle.classList.add('display-none'); 
-      cafeText.classList.add('display-none'); 
-      restTitle.classList.remove('display-none'); 
-      restText.classList.remove('display-none'); 
-      parkingTitle.classList.add('display-none'); 
-      parkingText.classList.add('display-none'); 
-      cafePhoto.classList.add('display-none'); 
-      restPhoto.classList.remove('display-none'); 
-      parkingPhoto.classList.add('display-none');
+      serviceInfoWrapper[1].classList.remove('display-none'); 
+      serviceInfoWrapper[0].classList.add('display-none'); 
+      serviceInfoWrapper[2].classList.add('display-none'); 
+      servicesPhoto[1].classList.remove('display-none'); 
+      servicesPhoto[0].classList.add('display-none'); 
+      servicesPhoto[2].classList.add('display-none'); 
     });
   
     switcherRight.addEventListener('click', () => {
+      switcherSlider.classList.remove('switcher-slider__slider-left');
+      switcherSlider.classList.remove('switcher-slider__slider-center');
+      switcherSlider.classList.add('switcher-slider__slider-right');
+
       switcherLeft.classList.remove('switcher-click-color'); 
       switcherCenter.classList.remove('switcher-click-color'); 
       switcherRight.classList.add('switcher-click-color');
-      cafeTitle.classList.add('display-none'); 
-      cafeText.classList.add('display-none'); 
-      restTitle.classList.add('display-none'); 
-      restText.classList.add('display-none');   
-      parkingTitle.classList.remove('display-none'); 
-      parkingText.classList.remove('display-none');
-      cafePhoto.classList.add('display-none'); 
-      restPhoto.classList.add('display-none'); 
-      parkingPhoto.classList.remove('display-none');
+      serviceInfoWrapper[2].classList.remove('display-none'); 
+      serviceInfoWrapper[0].classList.add('display-none'); 
+      serviceInfoWrapper[1].classList.add('display-none');
+      servicesPhoto[2].classList.remove('display-none'); 
+      servicesPhoto[0].classList.add('display-none'); 
+      servicesPhoto[1].classList.add('display-none');
     });
   
   }());  
   
-  /* ------------- END switcher in services section-------------*/
+  /* -------------  switcher in services section END-------------*/
 
-  'use strict';
+
 /* --------------START Video Youtube----------*/
 
 function onYouTubePlayerAPIReady() {
@@ -135,3 +223,4 @@ var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 /* ------------- END Video Youtube-------------*/
+
