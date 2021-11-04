@@ -1,4 +1,4 @@
-'use strict';
+
 
 /* -------------  open and close nav-menu START-------------*/
   
@@ -6,47 +6,34 @@
 (function () {
     const navWrapper = document.querySelector('.nav-wrapper');
     const mainItem = document.querySelector('.main-item');
-    const menuItemBurger = document.querySelectorAll('.menu__item_burger');
-    const navMenu = document.querySelector('.nav-menu');
-    const menuItem = document.querySelectorAll('.menu__item')
-    const itemTitle = document.querySelector('.item-title');
+    const menuItemBurger = document.querySelector('.menu__item_burger');
+    const body = document.body;
     let base = true;
 
 
     if (document.documentElement.clientWidth > 540) {
       navWrapper.addEventListener('mouseenter', () => {
-        navWrapper.classList.add('width_nav-open');
-        [...document.getElementsByClassName('item-title')].forEach(i => 
-          i.classList.add("font-size__item-title"));  
-        menuItemBurger[0].classList.add('display-none');
-        menuItemBurger[1].classList.remove('display-none');
+        navWrapper.classList.add('nav-active'); 
+        menuItemBurger.classList.add('burger-active');
+
         base = false;
   
       });
   
       navWrapper.addEventListener('mouseleave', () => {
-        navWrapper.classList.remove('width_nav-open'); 
-        [...document.getElementsByClassName('item-title')].forEach(i => 
-          i.classList.remove("font-size__item-title"));
-        menuItemBurger[0].classList.remove('display-none');
-        menuItemBurger[1].classList.add('display-none');
+        navWrapper.classList.remove('nav-active');
+        menuItemBurger.classList.remove('burger-active');
       });
   
       mainItem.addEventListener('click', () => {
         if (base) {
-          navWrapper.classList.add('width_nav-open');
-          [...document.getElementsByClassName('item-title')].forEach(i => 
-            i.classList.add("font-size__item-title")); 
-          menuItemBurger[0].classList.add('display-none');
-          menuItemBurger[1].classList.remove('display-none');
+          navWrapper.classList.add('nav-active');
+          menuItemBurger.classList.add('burger-active');
           base = false; 
   
         } else {
-          navWrapper.classList.remove('width_nav-open'); 
-          [...document.getElementsByClassName('item-title')].forEach(i => 
-            i.classList.remove("font-size__item-title")); 
-          menuItemBurger[0].classList.remove('display-none');
-          menuItemBurger[1].classList.add('display-none');
+          navWrapper.classList.remove('nav-active'); 
+          menuItemBurger.classList.remove('burger-active');
           base = true;
   
         }
@@ -54,66 +41,21 @@
 
     } else {
 
-      navWrapper.addEventListener('mouseenter', () => {
-        navWrapper.style.height = "100%";
-        navMenu.style.height = "100%";
-        
-        
-        itemTitle.style.fontSize = "1rem";
-        itemTitle.style.display = "block";
-        for (i = 1; i < menuItem.length; i++) {
-          menuItem[i].style.display = "flex";
-        }
-        menuItemBurger[0].classList.add('display-none');
-        menuItemBurger[1].classList.remove('display-none');
-        base = false;
-      });
-  
-      navWrapper.addEventListener('mouseleave', () => {
-        navWrapper.style.height = "58px"; 
-        navMenu.style.height = "58px";
-        for (i = 1; i < menuItem.length; i++) {
-          menuItem[i].style.display = "none";
-        } 
-        itemTitle.style.display = "none";
-        [...document.getElementsByClassName('item-title')].forEach(i => 
-          i.classList.remove("font-size__item-title"));
-        menuItemBurger[0].classList.remove('display-none');
-        menuItemBurger[1].classList.add('display-none');
-      });
-  
       mainItem.addEventListener('click', () => {
         if (base) {
-          navWrapper.style.height = "100%";
-          navMenu.style.height = "100%";
-          for (i = 1; i < menuItem.length; i++) {
-            menuItem[i].style.display = "flex";
-          }
-          itemTitle.style.fontSize = "1rem";
-          itemTitle.style.display = "block";
-          [...document.getElementsByClassName('item-title')].forEach(i => 
-            i.classList.add("font-size__item-title")); 
-          menuItemBurger[0].classList.add('display-none');
-          menuItemBurger[1].classList.remove('display-none');
+          navWrapper.classList.add('nav-active');
+          body.classList.add('no-scroll');
+          menuItemBurger.classList.add('burger-active');
           base = false; 
   
         } else {
-          navWrapper.style.height = "58px"; 
-          navMenu.style.height = "58px"; 
-          for (i = 1; i < menuItem.length; i++) {
-            menuItem[i].style.display = "none";
-          }
-          itemTitle.style.display = "none";
-          [...document.getElementsByClassName('item-title')].forEach(i => 
-            i.classList.remove("font-size__item-title")); 
-          menuItemBurger[0].classList.remove('display-none');
-          menuItemBurger[1].classList.add('display-none');
+          navWrapper.classList.remove('nav-active');
+          body.classList.remove('no-scroll');
+          menuItemBurger.classList.remove('burger-active');
           base = true;
         }
       });
     };
-
-    
   }());  
 
 
@@ -182,7 +124,7 @@
   }());  
   
   /* -------------  switcher in services section END-------------*/
-
+  'use strict';
 
 /* --------------START Video Youtube----------*/
 
